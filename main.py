@@ -46,9 +46,41 @@ class MainWindow(qtw.QMainWindow):
         self.__create_search_widgets()
     
     def __create_search_widgets(self):
+        self.search_layout.addSpacing(10)
+
         self.mytube_label = ClickedLabel()
         self.mytube_label.setPixmap(qtg.QPixmap(os.path.join(os.path.dirname(__file__), 'Resources/mytube_icon.png')))
+        self.mytube_label.setFixedSize(110, 65)
+        self.mytube_label.setScaledContents(True)
         self.search_layout.addWidget(self.mytube_label)
+
+        self.spacer_widget = qtw.QWidget()
+        self.spacer_widget.setSizePolicy(qtw.QSizePolicy.Policy.Expanding, qtw.QSizePolicy.Policy.Preferred)
+        self.spacer_widget.setMinimumWidth(50)
+        self.spacer_widget.setMaximumWidth(400)
+        self.search_layout.addWidget(self.spacer_widget)
+        
+        self.search_line = qtw.QLineEdit(self)
+        self.search_line.setPlaceholderText("Введите запрос")
+        self.search_line.setStyleSheet("""
+            QLineEdit {
+                border: 1px solid gray;
+                border-radius: 15px;
+                padding: 10px;
+                padding-right: 30px; /* Add padding to the right to make space for the icons */
+                font-size: 16px;
+                background-color: #f0f0f0;
+            }
+            QLineEdit::right-inner-addon {
+                padding-right: 30px; /* Adjust padding for inner content */
+            }
+        """)
+        self.search_layout.addWidget(self.search_line)
+
+        
+        spacer = qtw.QSpacerItem(100, 20, qtw.QSizePolicy.Policy.Expanding, qtw.QSizePolicy.Policy.Minimum)
+        self.search_layout.addItem(spacer)
+
 
 
 
